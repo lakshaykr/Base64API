@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, Response
 import base64
 
 app = Flask(__name__)
@@ -7,9 +7,10 @@ app = Flask(__name__)
 def encode():
     text = request.args.get("text")
     if not text:
-        return jsonify({"error": "Missing 'text' parameter"}), 400
+        return Response("Missing 'text' parameter", status=400)
+
     encoded = base64.b64encode(text.encode()).decode()
-    return jsonify({encoded})
+    return Response(encoded, mimetype="text/plain")
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
