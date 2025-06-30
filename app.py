@@ -1,9 +1,20 @@
 from flask import Flask, render_template, request, session, redirect
-from config import TOKEN, CLIENT_SECRET, OAUTH_URL, REDIRECT_URI
+#from config import TOKEN, CLIENT_SECRET, OAUTH_URL, REDIRECT_URI
 from zenora import APIClient
 
+
+from dotenv import load_dotenv
+import os
+
+load_dotenv()  
+TOKEN = os.getenv("TOKEN")
+CLIENT_SECRET = os.getenv("CLIENT_SECRET")
+OAUTH_URL = os.getenv("OAUTH_URL")
+REDIRECT_URI = os.getenv("REDIRECT_URI")
+FLASK_SECRET = os.getenv("SECRET")
+
 app = Flask(__name__)
-app.config['SECRET_KEY'] = "verysecret"
+app.config['SECRET_KEY'] = f"{FLASK_SECRET}"
 client = APIClient(TOKEN, client_secret=CLIENT_SECRET)
 
 @app.route('/')
