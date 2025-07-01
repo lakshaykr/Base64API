@@ -1,7 +1,7 @@
 # ✅ Base64API - ToDo List
 
 ## 🧑‍💻 Authentication
-- [ ] Implement Discord OAuth2 login
+- [x] Implement Discord OAuth2 login
 - [ ] On successful login:
   - [ ] Check if user exists in DB
   - [ ] If not, generate API key and save user
@@ -11,7 +11,7 @@
 - [ ] Generate secure, random API key (hidden by default)
 - [ ] Store user ID ↔ API key mapping in MongoDB
 - [ ] Allow key regeneration with confirmation
-- [ ] Provide copy-to-clipboard button
+- [x] Provide copy-to-clipboard button
 
 ## 📊 Key Usage Tracking
 - [ ] Store:
