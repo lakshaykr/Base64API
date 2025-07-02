@@ -628,6 +628,11 @@
             pointer-events: auto;
         }
 
+        .status-inactive.show-tooltip .status-tooltip {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
         .status-tooltip {
             opacity: 0;
             pointer-events: none;
@@ -869,6 +874,15 @@
             navigator.clipboard.writeText(url);
             showToast('Copied!');
         }
+        document.addEventListener('DOMContentLoaded', function() {
+            var inactiveStatus = document.querySelector('.status-inactive');
+            if (inactiveStatus) {
+                inactiveStatus.classList.add('show-tooltip');
+                setTimeout(function() {
+                    inactiveStatus.classList.remove('show-tooltip');
+                }, 2500);
+            }
+        });
     </script>
 </body>
 
