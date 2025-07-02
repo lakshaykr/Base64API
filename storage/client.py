@@ -44,3 +44,4 @@ def regenerate_api_key(user_id, new_api_key):
         return "API key updated successfully"
     else:
         return "User not found"
+
