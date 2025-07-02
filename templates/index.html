@@ -829,12 +829,12 @@
     <div class="dashboard">
         <div class="left-panel">
 
-            {% if activity_status is sameas true %}
+            {% if locked_status is sameas true %}
             <div class="status status-inactive" tabindex="0">
                 Status: <span class="inactive">Inactive</span>
                 <span class="status-tooltip">You were inactive for more than 7 days. </span>
             </div>
-            {% elif activity_status is sameas false %}
+            {% elif locked_status is sameas false %}
             <div class="status">Status: <span class="active">Active</span></div>
             {% endif %}
             <img class="avatar" src="{{ current_user.avatar_url }}" alt="Avatar">
@@ -857,13 +857,13 @@
                 </div>
             </div>
 
-            {% if activity_status is sameas false %}
+            {% if locked_status is sameas false %}
 
                 <div class="api-warning-box">
                     <i data-lucide="alert-triangle" class="api-warning-icon"></i>
                     <span>Your API key will be automatically deleted after 7 days of inactivity.</span>
                 </div>
-            {% elif activity_status is sameas true %}
+            {% elif locked_status is sameas true %}
             {% endif %}
 
             <!-- Dropdown menu for Encode/Decode -->
