@@ -13,7 +13,7 @@ def encode():
     if not api_key:
         return Response("Missing 'key' parameter", status=400)
     if not is_api_key_valid(api_key):
-        return Response("Invalid or inactive API key", status=403)
+        return Response("Invalid or locked API key", status=403)
     if not text:
         return Response("Missing 'text' parameter", status=400)
 
@@ -28,4 +28,4 @@ def encode():
     return Response(encoded, mimetype="text/plain")
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5500, debug=True)

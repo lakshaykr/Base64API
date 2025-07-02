@@ -610,25 +610,25 @@
             overflow-x: hidden;
         }
 
-        .status-inactive {
-            border: 3px solid #facc15;
-            color: #b58105;
+        .status-locked {
+            border: 3px solid #fa1515;
+            color: #b50505;
             background: #fffbe6;
             box-shadow: 0 2px 8px 0 rgba(60, 72, 88, 0.04);
             position: relative;
         }
 
-        .status-inactive .inactive {
-            color: #b58105;
+        .status-locked .locked {
+            color: #b50505;
         }
 
-        .status-inactive:focus .status-tooltip,
-        .status-inactive:hover .status-tooltip {
+        .status-locked:focus .status-tooltip,
+        .status-locked:hover .status-tooltip {
             opacity: 1;
             pointer-events: auto;
         }
 
-        .status-inactive.show-tooltip .status-tooltip {
+        .status-locked.show-tooltip .status-tooltip {
             opacity: 1;
             pointer-events: auto;
         }
@@ -641,8 +641,8 @@
             top: 110%;
             transform: translateX(-50%);
             background: #fffbe6;
-            color: #b58105;
-            border: 1.5px solid #facc15;
+            color: #b50505;
+            border: 1.5px solid #fa1515;
             border-radius: 10px;
             padding: 14px 18px;
             font-size: 1rem;
@@ -830,9 +830,9 @@
         <div class="left-panel">
 
             {% if locked_status is sameas true %}
-            <div class="status status-inactive" tabindex="0">
-                Status: <span class="inactive">Inactive</span>
-                <span class="status-tooltip">You were inactive for more than 7 days. </span>
+            <div class="status status-locked" tabindex="0">
+                Status: <span class="locked">Locked</span>
+                <span class="status-tooltip">You’ve reached your monthly limit of 30 uses. Upgrade to premium to continue.</span>
             </div>
             {% elif locked_status is sameas false %}
             <div class="status">Status: <span class="active">Active</span></div>
@@ -861,7 +861,7 @@
 
                 <div class="api-warning-box">
                     <i data-lucide="alert-triangle" class="api-warning-icon"></i>
-                    <span>Your API key will be automatically deleted after 7 days of inactivity.</span>
+                    <span>Your API key will be automatically locked after 30 uses. To continue, you'll need to upgrade to premium.</span>
                 </div>
             {% elif locked_status is sameas true %}
             {% endif %}
@@ -946,11 +946,11 @@
             showToast('Copied!');
         }
         document.addEventListener('DOMContentLoaded', function() {
-            var inactiveStatus = document.querySelector('.status-inactive');
-            if (inactiveStatus) {
-                inactiveStatus.classList.add('show-tooltip');
+            var lockedStatus = document.querySelector('.status-locked');
+            if (lockedStatus) {
+                lockedStatus.classList.add('show-tooltip');
                 setTimeout(function() {
-                    inactiveStatus.classList.remove('show-tooltip');
+                    lockedStatus.classList.remove('show-tooltip');
                 }, 2500);
             }
         });
