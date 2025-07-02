@@ -18,8 +18,8 @@ def get_user_by_id(user_id):
     return users_collection.find_one({"_id": user_id})
 
 
-def create_new_user(user_id, api_key, use_count=0, last_use_hours_ago=0, inactivity_status=False, premium=False):
-    post = {"_id":user_id, "api_key":api_key, "use_count":use_count, "last_use_hours_ago":last_use_hours_ago, "inactive":inactivity_status, "premium":premium}
+def create_new_user(user_id, api_key, use_count=0, locked_status=False, premium=False):
+    post = {"_id":user_id, "api_key":api_key, "use_count":use_count, "locked":locked_status, "premium":premium}
     users_collection.insert_one(post)
     return "New Database Entry Created"
 
@@ -29,10 +29,10 @@ def get_api_key(user_id):
         return user.get("api_key")
     return None
 
-def get_activity_status(user_id):
+def get_locked_status(user_id):
     user = users_collection.find_one({"_id": user_id})
     if user:
-        return user.get("inactive")
+        return user.get("locked")
     return None
 
 def regenerate_api_key(user_id, new_api_key):

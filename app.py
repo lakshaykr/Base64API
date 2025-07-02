@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, session, redirect
 #from config import TOKEN, CLIENT_SECRET, OAUTH_URL, REDIRECT_URI
 from zenora import APIClient
-from storage.client import get_user_by_id, create_new_user, get_api_key, get_activity_status, regenerate_api_key
+from storage.client import get_user_by_id, create_new_user, get_api_key, get_locked_status, regenerate_api_key
 from utils.generatekey import generate_api_key
 
 from dotenv import load_dotenv
@@ -27,14 +27,14 @@ def home():
         if user_data:
             print("user found")
             api_key=get_api_key(current_user.id)
-            activity_status = get_activity_status(current_user.id)
+            locked_status = get_locked_status(current_user.id)
         else:
             print("user not found found")
             api_key = f"{current_user.id}:{generate_api_key()}"
             create_new_user(current_user.id, api_key)
-            activity_status = get_activity_status(current_user.id)
+            locked_status = get_locked_status(current_user.id)
 
-        return render_template("index.html", current_user=current_user, api_key=api_key, activity_status=activity_status)
+        return render_template("index.html", current_user=current_user, api_key=api_key, locked_status=locked_status)
     return render_template('index.html', oath_uri=OAUTH_URL)
 
 @app.route('/oauth/callback')
