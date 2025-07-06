@@ -13,16 +13,6 @@
 - [x] Allow key regeneration
 - [x] Provide copy-to-clipboard button
 
-## 📊 Key Usage Tracking
-- [ ] Store:
-  - [ ] `last_used` timestamp
-  - [ ] `use_count` increment on each request
-
-## ⛔ Inactive Key Handling
-- [ ] Run scheduled check (daily/weekly)
-- [ ] Mark keys inactive or delete if `last_used > X days`
-
-
 ## 🌐 Web Dashboard
 - [x] Show generated API key
 - [x] Display:
