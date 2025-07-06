@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Base64 API</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
@@ -767,6 +768,7 @@
             gap: 12px;
             padding: 0 0 0 2px;
         }
+
         .dropdown-label {
             font-size: 1.08rem;
             font-weight: 700;
@@ -774,6 +776,7 @@
             letter-spacing: 0.04em;
             text-transform: uppercase;
         }
+
         .dropdown-select {
             appearance: none;
             -webkit-appearance: none;
@@ -791,30 +794,37 @@
             box-shadow: 0 2px 8px 0 rgba(60, 72, 88, 0.04);
             cursor: pointer;
         }
+
         .dropdown-select:focus {
             border: 1.5px solid #2563eb;
             box-shadow: 0 0 0 3px #b3c6e6;
         }
+
         .dropdown-select option {
             background: #fafdff;
             color: #1a233a;
         }
+
         @media (max-width: 900px) {
             .dropdown-container {
                 margin-bottom: 12px;
             }
+
             .dropdown-label {
                 font-size: 0.98rem;
             }
+
             .dropdown-select {
                 font-size: 0.98rem;
                 padding: 8px 32px 8px 10px;
             }
         }
+
         @media (max-width: 600px) {
             .dropdown-container {
                 margin-bottom: 8px;
             }
+
             .dropdown-select {
                 font-size: 0.95rem;
                 padding: 7px 28px 7px 8px;
@@ -832,7 +842,8 @@
             {% if locked_status is sameas true %}
             <div class="status status-locked" tabindex="0">
                 Status: <span class="locked">Locked</span>
-                <span class="status-tooltip">You’ve reached your monthly limit of 30 uses. Upgrade to premium to continue.</span>
+                <span class="status-tooltip">You’ve reached your monthly limit of 30 uses. Upgrade to premium to
+                    continue.</span>
             </div>
             {% elif locked_status is sameas false %}
             <div class="status">Status: <span class="active">Active</span></div>
@@ -859,10 +870,11 @@
 
             {% if locked_status is sameas false %}
 
-                <div class="api-warning-box">
-                    <i data-lucide="alert-triangle" class="api-warning-icon"></i>
-                    <span>Your API key will be automatically locked after 30 uses. To continue, you'll need to upgrade to premium.</span>
-                </div>
+            <div class="api-warning-box">
+                <i data-lucide="alert-triangle" class="api-warning-icon"></i>
+                <span>Your API key will be automatically locked after 30 uses. To continue, you'll need to upgrade to
+                    premium.</span>
+            </div>
             {% elif locked_status is sameas true %}
             {% endif %}
 
@@ -886,7 +898,7 @@
                 <div class="example-row url-row">
                     <div class="url-box">
                         <span class="url-label">URL</span>
-                        <span class="url-value" id="generated-url">https://your-url.com</span>
+                        <span class="url-value" id="generated-url">http://base64.api-studio.xyz/encode?key={{ api_key }}&text=</span>
                         <button class="url-copy-btn" onclick="copyGeneratedUrl()" type="button" aria-label="Copy URL">
                             <i data-lucide="copy" class="copy-icon"></i>
                         </button>
@@ -895,7 +907,7 @@
                 <div class="example-row output-box-row">
                     <div class="output-box-flex">
                         <span class="output-label">OUTPUT</span>
-                        <div class="output-value output-box"></div>
+                        <div class="output-value output-box" id="output-text"></div>
                     </div>
                 </div>
             </div>
@@ -905,7 +917,9 @@
     {% else %}
     <div class="center-screen">
         <div class="container">
-            <img class="logo" src="https://raw.githubusercontent.com/lakshaykr/Base64API/refs/heads/beingrkn-apikey/templates/assets/logo.png" alt="Logo">
+            <img class="logo"
+                src="https://raw.githubusercontent.com/lakshaykr/Base64API/refs/heads/beingrkn-apikey/templates/assets/logo.png"
+                alt="Logo">
             <h1>Base 64 API (Unofficial)</h1>
             <p class="lead">
                 Simple and powerful API service that lets you encode text based data using Base64.
@@ -922,6 +936,14 @@
     {% endif %}
 
     <script>
+        $('input').keyup(function () {
+            var a = $(this).val();
+            $('#generated-url').text('http://base64.api-studio.xyz/encode?key={{ api_key }}&text=' + a);
+            var encoded = btoa(unescape(encodeURIComponent(a)));
+            $('#output-text').text(encoded);
+
+        });
+
         lucide.createIcons();
         function showToast(message) {
             let toast = document.createElement('div');
@@ -945,11 +967,11 @@
             navigator.clipboard.writeText(url);
             showToast('Copied!');
         }
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             var lockedStatus = document.querySelector('.status-locked');
             if (lockedStatus) {
                 lockedStatus.classList.add('show-tooltip');
-                setTimeout(function() {
+                setTimeout(function () {
                     lockedStatus.classList.remove('show-tooltip');
                 }, 2500);
             }

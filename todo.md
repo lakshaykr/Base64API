@@ -21,7 +21,7 @@
 - [x] Add “Copy Key” button
 
 ## 🧪 Preview Panel
-- [ ] Add test input field (e.g., for raw text)
-- [ ] Show API endpoint (copyable)
-- [ ] Display example output after calling endpoint
+- [x] Add test input field (e.g., for raw text)
+- [x] Show API endpoint (copyable)
+- [x] Display example output after calling endpoint
 
