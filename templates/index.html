@@ -854,8 +854,8 @@
                 ID: {{ current_user.id }}
             </div>
             <div class="button-row">
-                <a href="/logout"><button class="btn-logout"><i data-lucide="log-out"></i> LOGOUT</button></a>
-                <a href="/reset"><button class="btn-reset"><i data-lucide="rotate-ccw"></i> RESET API KEY</button></a>
+                <a href="/dashboard/logout"><button class="btn-logout"><i data-lucide="log-out"></i> LOGOUT</button></a>
+                <a href="/dashboard/reset"><button class="btn-reset"><i data-lucide="rotate-ccw"></i> RESET API KEY</button></a>
             </div>
         </div>
 
@@ -898,7 +898,7 @@
                 <div class="example-row url-row">
                     <div class="url-box">
                         <span class="url-label">URL</span>
-                        <span class="url-value" id="generated-url">http://base64.api-studio.xyz/encode?key={{ api_key }}&text=</span>
+                        <span class="url-value" id="generated-url">http://base64.api-studio.xyz/api/encode?key={{ api_key }}&text=</span>
                         <button class="url-copy-btn" onclick="copyGeneratedUrl()" type="button" aria-label="Copy URL">
                             <i data-lucide="copy" class="copy-icon"></i>
                         </button>
@@ -938,7 +938,7 @@
     <script>
         $('input').keyup(function () {
             var a = $(this).val();
-            $('#generated-url').text('http://base64.api-studio.xyz/encode?key={{ api_key }}&text=' + a);
+            $('#generated-url').text('http://base64.api-studio.xyz/api/encode?key={{ api_key }}&text=' + a);
             var encoded = btoa(unescape(encodeURIComponent(a)));
             $('#output-text').text(encoded);
 

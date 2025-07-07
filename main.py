@@ -1,11 +1,11 @@
-from flask import Flask, request, Response
+from flask import Flask, request, Response, Blueprint
 import base64
 from utils.keyvalidation import is_api_key_valid
 from utils.usagemanager import update_use_count
 
-app = Flask(__name__)
+bp = Blueprint('api', __name__)
 
-@app.route("/encode")
+@bp.route("/encode")
 def encode():
     text = request.args.get("text")
     api_key = request.args.get("key")
@@ -27,5 +27,3 @@ def encode():
     encoded = base64.b64encode(text.encode()).decode()
     return Response(encoded, mimetype="text/plain")
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5500, debug=True)
