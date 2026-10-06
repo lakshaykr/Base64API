@@ -27,3 +27,7 @@ def encode():
     encoded = base64.b64encode(text.encode()).decode()
     return Response(encoded, mimetype="text/plain")
 
+
+    encoded = base64.b64encode(text.encode()).decode()
+    return Response(encoded, mimetype="text/plain")
+
